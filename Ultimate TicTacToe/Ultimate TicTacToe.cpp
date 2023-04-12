@@ -2,11 +2,17 @@
 //
 
 #include <iostream>
+#include "Board.h"
+
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
-}
+
+	Board plansza;
+};
+
+
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
 // Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
