@@ -2,14 +2,16 @@
 //
 
 #include <iostream>
-#include "Board.h"
+#include "Game.h"
 
 
 
 int main()
 {
-
-	Board plansza;
+	Game gra;
+	int a = 5;
+	
+	return 0;
 };
 
 

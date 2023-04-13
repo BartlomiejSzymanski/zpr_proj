@@ -1,17 +1,33 @@
 #pragma once
 #include <variant>
 #include <vector>
+#include <math.h>
 
 class Board;
- 
-using Grid = std::vector<std::variant<char, Board>>;
+
+enum class sign {
+
+	iks,
+	igrek,
+	nic
+
+};
+
+
+using Field = std::variant<sign, Board>;
+using Grid = std::vector<Field>;
+
+
 
 class Board{
 	public:
-		Board() {Spaces = Grid(9 ,'.'); };
 
-		Board(unsigned int nesting) { Spaces = (nesting > 0) ? Board(nesting - 1).Spaces : Board().Spaces; };
+		Board() {};
+		~Board() {};
 
+		Board(unsigned int size,bool is_nested = 0);
+
+		
 
 
 		Grid Spaces;
