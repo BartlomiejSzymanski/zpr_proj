@@ -8,16 +8,17 @@ class Game
 {
 public:
 
-	Game() : x(new Board), y(x) {};
+	Game() : X(new Board), Y(X), Turn(0){};
 	~Game() {};
 
-	bool Turn();
+	void turn();
 	size_t is_won();
 
 private:
 
-	PBoard x;
-	Controler y;
+	bool Turn;
+	PBoard X;
+	Controler Y;
 
 };
 

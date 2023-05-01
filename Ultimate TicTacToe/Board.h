@@ -22,14 +22,14 @@ using Grid = std::vector<Field>;
 class Board{
 	public:
 
-		Board() {};
+		Board();
 		~Board() {};
 
-		Board(unsigned int size,bool is_nested = 0);
+		Board(size_t _size,Field field = sign::nic);
 
 		
 
-
+		const int Size;
 		Grid Spaces;
 };
 

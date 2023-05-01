@@ -1,8 +1,8 @@
 #include "Game.h"
 
-bool Game::Turn()
+void Game::turn()
 {
-	return false;
+	// to do 
 }
 
 size_t Game::is_won()

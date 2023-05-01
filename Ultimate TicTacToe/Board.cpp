@@ -1,12 +1,12 @@
 #include "Board.h"
 
 
-Board::Board(unsigned int size, bool is_nested)
+Board::Board() : Size(3)
 {
-	if (is_nested) {
-		Spaces = Grid(pow(size, 2), Board(size,0));
-	}
-	else {
-		Spaces = Grid(pow(size, 2), sign::nic);
-	}
+	// to do 
+}
+
+Board::Board(size_t _size, Field field): Size(_size)
+{
+		Spaces = Grid(pow(Size, 2), field);
 }

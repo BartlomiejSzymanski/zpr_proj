@@ -10,13 +10,13 @@ using PBoard = std::shared_ptr<Board>;
 class Controler
 {	public:
 
-	Controler() :board(new Board(3,1)){};
+	Controler() :board(new Board){};
 
 	Controler(PBoard _board) :board(_board) {};
 
-	Field& Get(size_t);
+	Field& GetField(size_t);
 
-	Field&  Get(size_t, size_t);
+	Field&  GetField(size_t, size_t);
 
 	bool move(size_t, size_t,sign);
 
