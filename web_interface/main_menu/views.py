@@ -5,6 +5,7 @@ def index(request):
     return HttpResponse("Hello world")
 
 
+
 def game_options(request):
     if request.method == 'POST':
         if 'singleplayer' in request.POST:
