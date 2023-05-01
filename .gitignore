@@ -428,3 +428,6 @@ FodyWeavers.xsd
 
 resource.h
 *.rc
+*.filters
+*.vcxproj
+*.sln
