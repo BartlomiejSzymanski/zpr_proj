@@ -8,3 +8,8 @@ python manage.py runserver
 ```
 
 
+To run tests:
+
+```
+python manage.py test
+```
