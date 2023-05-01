@@ -7,4 +7,8 @@ To run application use the following commands:
 python manage.py runserver
 ```
 
+To run tests:
 
+```
+python manage.py test
+```
