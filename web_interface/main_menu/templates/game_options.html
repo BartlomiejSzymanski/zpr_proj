@@ -1,5 +1,18 @@
-<form method="post">
-    {% csrf_token %}
-    <input type="submit" name="singleplayer" value="Single Player">
-    <input type="submit" name="playervscpu" value="Player vs CPU">
-</form>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/game_options.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Choose game mode</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" name="singleplayer" value="Single Player">
+            <input type="submit" name="playervscpu" value="Player vs CPU">
+        </form>
+    </div>
+</body>
+</html>
