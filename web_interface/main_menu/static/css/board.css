@@ -1,0 +1,58 @@
+#board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), 1fr);
+  grid-template-rows: repeat(var(--board-size), 1fr);
+  gap: 5px;
+  width: 600px;
+  height: 600px;
+}
+
+.cell {
+  display: grid;
+  grid-template-columns: repeat(var(--board-size), 1fr);
+  grid-template-rows: repeat(var(--board-size), 1fr);
+  gap: 1px;
+  background-color: lightgray;
+}
+
+.sub-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(80px / var(--board-size));
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.sub-cell:hover {
+  background-color: lightblue;
+}
+
+.sub-cell.selected {
+  background-color: gray;
+}
+
+.sub-cell.player1::before {
+  content: "X";
+}
+
+.sub-cell.player2::before {
+  content: "O";
+}
+
+.cell.highlighted {
+  background-color: yellow;
+}
+
+.sign-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(200px / var(--board-size));
+  background-color: lightgray;
+  
+}
+
+.message {
+  font-size: 100px;
+}

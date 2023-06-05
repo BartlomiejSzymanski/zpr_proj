@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scalable Tic Tac Toe</title>
+  <script src="{% static 'js/board.js' %}"></script>
+  <style>
+    #board {
+      --board-size: {{ board_size }};
+    }
+  </style>
+  <div id="board" data-board-size="{{ board_size }}"></div>
+  <body onload="createBoard(parseInt(document.getElementById('board').dataset.boardSize))"> </body>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/board.css' %}">
+</head>
+<div id="game-container">
+  <button id = "move-button" onclick="handleSubmit()">Make move</button>
+  <button onclick = "location.href='/'">Main Menu</button>
+</div>
+
+</html>
+
+

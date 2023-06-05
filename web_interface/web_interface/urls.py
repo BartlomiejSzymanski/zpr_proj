@@ -20,5 +20,5 @@ from django.urls import include, path
 from main_menu import views
 
 urlpatterns = [
-    path('', include("main_menu.urls")),
+    path('', include("main_menu.urls"))
 ]
