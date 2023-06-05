@@ -8,17 +8,20 @@ using PBoard = std::shared_ptr<Board>;
 
 
 class Controler
-{	public:
+{
+public:
 
-	Controler() :board(new Board){};
+	Controler() :board(new Board) {};
 
 	Controler(PBoard _board) :board(_board) {};
 
-	Field& GetField(size_t);
+	Field& GetField(size_t, size_t);
 
-	Field&  GetField(size_t, size_t);
+	Field& GetField(size_t, size_t, size_t, size_t);
 
-	bool move(size_t, size_t,sign);
+	bool move(size_t, size_t, sign);
+
+	bool move(size_t, size_t, size_t, size_t, sign);
 
 
 	PBoard board;

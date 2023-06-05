@@ -2,6 +2,11 @@
 #include <variant>
 #include <vector>
 #include <math.h>
+#include <iostream>
+#include <iostream>
+#include <string>
+#include <variant>
+#include <vector>
 
 class Board;
 
@@ -15,21 +20,27 @@ enum class sign {
 
 
 using Field = std::variant<sign, Board>;
-using Grid = std::vector<Field>;
+using Row = std::vector<Field>;
+using Grid = std::vector<std::vector<Field>>;
 
 
 
-class Board{
-	public:
+class Board {
+public:
 
-		Board();
-		~Board() {};
+	Board();
+	~Board() {};
 
-		Board(size_t _size,Field field = sign::nic);
 
-		
+	Board(Grid spaces, const int size) : Size(size), Spaces(spaces) {};
+	Board(size_t _size, Field field = sign::nic);
+	size_t getSize();
+	Grid& getGrid();
 
-		const int Size;
-		Grid Spaces;
+	void printBoard() const;
+
+private:
+	size_t Size;
+	Grid Spaces;
 };
 
