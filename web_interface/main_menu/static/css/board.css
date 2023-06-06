@@ -3,8 +3,8 @@
   grid-template-columns: repeat(var(--board-size), 1fr);
   grid-template-rows: repeat(var(--board-size), 1fr);
   gap: 5px;
-  width: 600px;
-  height: 600px;
+  width: calc(600px * var(--board-size)/3);
+  height: calc(600px * var(--board-size)/3);
 }
 
 .cell {
@@ -19,10 +19,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: calc(80px / var(--board-size));
+  font-size: calc(70px / var(--board-size));
   cursor: pointer;
   border: 1px solid black;
 }
+
 
 .sub-cell:hover {
   background-color: lightblue;
