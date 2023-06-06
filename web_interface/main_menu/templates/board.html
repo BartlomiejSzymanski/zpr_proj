@@ -7,14 +7,24 @@
   <style>
     #board {
       --board-size: {{ board_size }};
+      
     }
   </style>
+  <style>
+    #mode {
+      --game-mode: {{ game_mode }};
+    }
+
+  </style>
   <div id="board" data-board-size="{{ board_size }}"></div>
-  <body onload="createBoard(parseInt(document.getElementById('board').dataset.boardSize))"> </body>
+  <div id="mode" data-game-mode = "{{ game_mode }}"></div>
+
+  <body onload="createBoard()"> </body>
   <link rel="stylesheet" type="text/css" href="{% static 'css/board.css' %}">
 </head>
 <div id="game-container">
-  <button id = "move-button" onclick="handleSubmit()">Make move</button>
+  {% csrf_token %}
+  <button id = "move-button" onclick="humanMove()">Make move</button>
   <button onclick = "location.href='/'">Main Menu</button>
 </div>
 

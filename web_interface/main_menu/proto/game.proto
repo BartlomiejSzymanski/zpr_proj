@@ -3,9 +3,13 @@ syntax = "proto3";
 package game;
 
 service Game {
+    rpc GameSetup (Setup) returns (EngineResponse);
     rpc MakeMove (Move) returns (EngineResponse);
+}
 
-    rpc IsWon (Message) returns (EngineResponse);
+message Setup{
+    int32 boardSize = 1;
+    int32 gameMode = 2;
 }
 
 message Move {
@@ -13,15 +17,16 @@ message Move {
     int32 col = 2;
     int32 subRow = 3;
     int32 subCol = 4;
-    string player = 5;
-
+    int32 player = 5;
 }
 
-message Message {
-    int32 nothing = 1;
-}
 
 message EngineResponse{
-    int32 won = 1;
-    string player = 2;
+    int32 gameWon = 1;
+    int32 subCellWon = 2;
+    int32 row = 3;
+    int32 col = 4;
+    int32 subRow = 5;
+    int32 subCol = 6;
+    
 }
