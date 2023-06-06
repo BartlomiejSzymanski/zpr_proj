@@ -1,21 +1,41 @@
-This app was created using the tutorial from : https://docs.djangoproject.com/en/4.2/intro/tutorial01/
 
+# Prerequisites:
+-Django
+- gRPC for python
 Before running, make sure that you're inside /zpr_proj/web_interface/
-To run application use the following commands:
 
+```
+pip install django
+pip install grpcio-tools
+pip install grpcio
+```
+# To run application use the following commands:
 ```
 python manage.py runserver
 ```
 
-To run tests:
-
-```
-python manage.py test
-```
-
-To generate gRPC files:
+# To generate gRPC files:
 ```
 > cd web_interface/main_menu
->python3 -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/game.proto
+>python3 -m grpc_tools.protoc -I proto --python_out=. --grpc_python_out=. proto/game.proto
 ```
 game_pb2_grpc.py and game_pb2.py should appear in the web_interface/main_menu folder
+
+# Generate documentation for board.js:
+```
+sudo apt install npm 
+sudo npm install -g jsdoc
+jsdoc main_menu/static/js/board.js --destination doc/boardjs
+```
+Documentation will appear in doc/board.js
+
+# Generate documentation for views.py:
+prerequisites:
+doxygen
+
+```
+sudo apt-get install graphviz
+[pwd == web_interface/main_menu]
+doxygen Doxyfile 
+```
+documentation will appear in doc/views
