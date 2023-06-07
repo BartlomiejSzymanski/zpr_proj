@@ -23,7 +23,7 @@ TEST_CASE("Controler can modify nested boards", "[Controler]"){
     PBoard sisiak2(new Board(5, Board(5, sign::nothing)));
 	Controler controler2(sisiak);
 	controler2.move(3, 2, 4, 1, sign::circle);
-    controle2.move(4, 1, 1, 2, sign::ex);
+    controler2.move(4, 1, 1, 2, sign::ex);
 	
     REQUIRE(std::get<sign>(controler.GetField(2, 1, 0, 1)) == sign::circle);
     REQUIRE(std::get<sign>(controler.GetField(0, 1, 2, 2)) == sign::ex);
