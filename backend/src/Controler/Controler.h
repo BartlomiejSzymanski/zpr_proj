@@ -1,8 +1,10 @@
-#pragma once
+
 #include <memory>
 #include <stdexcept>
+#include "Board.h" 
 
-#include "Board.h"
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 using PBoard = std::shared_ptr<Board>;
 
@@ -74,3 +76,4 @@ private:
 	PBoard board;
 };
 
+#endif

@@ -1,7 +1,8 @@
 #include "Game.h"
 #include <algorithm>
 #include <unordered_map>
-#pragma once
+#ifndef AIPLAYER_H
+#define AIPLAYER_H
 
 /*!
  * @class This class is rensponsible for "thought" process of Ai
@@ -39,3 +40,4 @@ private:
 	std::unordered_map<std::string, int> cache;
 };
 
+#endif
