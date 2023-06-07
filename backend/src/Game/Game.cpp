@@ -89,7 +89,7 @@ win Game::is_won()
                 }
             }
             catch (const std::bad_variant_access& e) {
-                std::cout << "jakiœ b³¹d z variantami" << std::endl;
+                std::cout << "jakiï¿½ bï¿½ï¿½d z variantami" << std::endl;
             }
         }
     }
@@ -214,14 +214,14 @@ int Game::countMovesToWin(sign player, std::unordered_map<std::string, int>& cac
     std::shared_ptr<Board>& board = this->board;
     std::string boardState = board->getState(); // Unikalny identyfikator stanu planszy
 
-    // SprawdŸ, czy wynik dla tego stanu planszy jest ju¿ w pamiêci podrêcznej
+    // Sprawdï¿½, czy wynik dla tego stanu planszy jest juï¿½ w pamiï¿½ci podrï¿½cznej
     if (cache.find(boardState) != cache.end()) {
         return cache[boardState];
     }
 
     Game game(board);
 
-    // SprawdŸ, czy gracz wygra³ w bie¿¹cym stanie planszy
+    // Sprawdï¿½, czy gracz wygraï¿½ w bieï¿½ï¿½cym stanie planszy
     if (game.is_won().win && game.is_won().sign_ == player) {
         return 0;
     }
@@ -238,16 +238,16 @@ int Game::countMovesToWin(sign player, std::unordered_map<std::string, int>& cac
                 // Wykonaj ruch
                 board->getGrid()[i][j] = player;
 
-                // Stwórz now¹ instancjê Game, korzystaj¹c z aktualnej planszy
+                // Stwï¿½rz nowï¿½ instancjï¿½ Game, korzystajï¿½c z aktualnej planszy
                 Game game(board);
 
-                // Rekurencyjne wywo³anie funkcji dla nastêpnego gracza
+                // Rekurencyjne wywoï¿½anie funkcji dla nastï¿½pnego gracza
                 int moves = game.countMovesToWin(player, cache);
 
-                // Przywróæ poprzedni stan planszy
+                // Przywrï¿½ï¿½ poprzedni stan planszy
                 board->getGrid()[i][j] = originalValue;
 
-                // Zaktualizuj minimaln¹ liczbê ruchów
+                // Zaktualizuj minimalnï¿½ liczbï¿½ ruchï¿½w
                 if (moves >= 0 && moves < minMoves) {
                     minMoves = moves;
                 }
@@ -255,16 +255,16 @@ int Game::countMovesToWin(sign player, std::unordered_map<std::string, int>& cac
         }
     }
 
-    // Dodaj ruch bie¿¹cego gracza do minimalnej liczby ruchów
+    // Dodaj ruch bieï¿½ï¿½cego gracza do minimalnej liczby ruchï¿½w
     int result;
     if (minMoves != std::numeric_limits<int>::max()) {
         result = minMoves + 1;
     }
     else {
-        result = -1; // Brak mo¿liwych ruchów
+        result = -1; // Brak moï¿½liwych ruchï¿½w
     }
 
-    // Zapisz wynik dla tego stanu planszy w pamiêci podrêcznej
+    // Zapisz wynik dla tego stanu planszy w pamiï¿½ci podrï¿½cznej
     cache[boardState] = result;
 
     return result;

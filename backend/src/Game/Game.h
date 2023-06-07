@@ -1,9 +1,9 @@
-#pragma once
 #include "Controler.h"
 #include <utility> 
 #include <unordered_map>
 
-
+#ifndef GAME_H
+#define GAME_H
 
 using PBoard = std::shared_ptr<Board>;
 
@@ -159,3 +159,4 @@ private:
 
 };
 
+#endif

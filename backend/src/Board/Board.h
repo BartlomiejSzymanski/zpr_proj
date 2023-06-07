@@ -1,9 +1,10 @@
-#pragma once
 #include <variant>
 #include <vector>
 #include <math.h>
 #include <iostream>
 #include <string>
+#ifndef BOARD_H
+#define BOARD_H
 
 class Board;
 
@@ -91,4 +92,6 @@ private:
 	size_t Size;
 	Grid Spaces;
 };
+
+#endif
 

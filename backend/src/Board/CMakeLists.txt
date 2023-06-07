@@ -1,2 +1,3 @@
-add_library(Board Board.cpp)
-target_include_directories(Board PUBLIC .)
+add_library(board Board.cpp)
+
+target_include_directories(board PUBLIC .)

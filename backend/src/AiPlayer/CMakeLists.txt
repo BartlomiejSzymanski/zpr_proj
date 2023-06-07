@@ -1,4 +1,4 @@
-add_library(AiPlayer AiPlayer.cpp)
+add_library(aiplayer AiPlayer.cpp)
 
-target_link_libraries(AiPlayer PUBLIC Player)
-target_include_directories(AiPlayer PUBLIC .)
+target_link_libraries(aiplayer PUBLIC game)
+target_include_directories(aiplayer PUBLIC .)

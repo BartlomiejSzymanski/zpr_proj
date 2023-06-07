@@ -1,5 +1,4 @@
-add_library(Controler Controler.cpp)
+add_library(controler Controler.cpp)
 
-target_link_libraries(Controler PUBLIC Board)
-
-target_include_directories(Controler PUBLIC .)
+target_link_libraries(controler PUBLIC board)
+target_include_directories(controler PUBLIC .)

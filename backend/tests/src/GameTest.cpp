@@ -41,9 +41,9 @@ TEST_CASE("Controler can modify upper boards", "[Controler]" ) {
     controler.move(0, 1, sign::ex);
 
     PBoard sisiak2(new Board(5, Board(5, sign::nothing)));
-	Controler controler2(sisiak);
+	Controler controler2(sisiak2);
 	controler2.move(3, 2,sign::circle);
-    controle2.move(4, 1, sign::ex);
+    controler2.move(4, 1, sign::ex);
 		
 
 
@@ -242,9 +242,9 @@ TEST_CASE("Test Ai for ilegal moves:", "[Ai]" ) {
     REQUIRE(move1.first > -1);
     REQUIRE(move1.second > -1);
 
-    REQUIRE(move2.first.first != 1 && move2.first.second != 1);
-    REQUIRE(move2.first.first != 0 && move2.first.second != 1);
-    REQUIRE( move2.first.first > 0 &&  move2.first.second > 0 && move2.second.first > 0 && move2.second.second > 0);
+    REQUIRE(((move2.first.first != 1) && (move2.first.second != 1)));
+    REQUIRE(((move2.first.first != 0) && (move2.first.second != 1)));
+    REQUIRE( ((move2.first.first > 0) && ( move2.first.second > 0) && (move2.second.first > 0) && (move2.second.second > 0)));
 
     
 
