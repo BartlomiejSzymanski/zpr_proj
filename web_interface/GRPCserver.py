@@ -18,7 +18,7 @@ class DefinedGameServicer(game_pb2_grpc.GameServicer):
         print(request.row,"\n", request.col, "\n", request.subRow, "\n", request.subCol, "\n", request.player)
         engine_response = game_pb2.EngineResponse()
         engine_response.gameWon = 0
-        engine_response.subCellWon = 0
+        engine_response.subCellWon = 1
         engine_response.row = 0
         engine_response.col = 0
         engine_response.subRow = 0
