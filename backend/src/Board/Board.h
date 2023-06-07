@@ -50,7 +50,7 @@ public:
 	Board(size_t _size, Field field = sign::nothing);
 
 	/*!
-	* constructor which creates board of Ultimate TicTacToe (nested TicTacToe bards) of a given size based
+	* constructor which creates board of TicTacToe of a given size based
 	* on two-dimensional dynamic array of Fields which are other boards or signs
 	* @param two-dimensional dynamic array of Fields which are other boards or signs which represents TicTacToe board
 	* @param size
