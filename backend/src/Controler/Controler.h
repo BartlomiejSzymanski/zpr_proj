@@ -9,7 +9,7 @@
 using PBoard = std::shared_ptr<Board>;
 
 /*!
- * @class Composite class that allows for control over boardstates
+ *  Composite class that allows for control over boardstates
  */
 class Controler
 {
@@ -26,53 +26,51 @@ public:
 	Controler(PBoard _board) :board(_board) {};
 
 	/*!
-	* @fn allows acces to specified field of the board
+	*  allows acces to specified field of the board
 	* @param X index of the field
 	* @param Y index of the field
 	*/
-	Field& GetField(size_t, size_t);
+	Field& GetField(size_t X, size_t Y);
 
 	/*!
-	* @fn allows acces to specified field of the nested board
+	*  allows acces to specified field of the nested board
 	* @param X index of the field
 	* @param Y index of the field
-	* @param nested X index of the field
-	* @param nested Y index of the field
+	* @param nested_X index of the field
+	* @param nested_Y index of the field
 	*/
-	Field& GetField(size_t, size_t, size_t, size_t);
+	Field& GetField(size_t X, size_t Y, size_t nested_X, size_t nested_Y);
 
 	/*!
-	* @fn allows to change the specific fields of board
+	* allows to change the specific fields of board
 	* @param X index of the field
 	* @param Y index of the field
 	* @param sign that will be emplaced
 	* @return A boolean value that denotes the success of the action
 	*/
-	bool move(size_t, size_t, sign);
+	bool move(size_t X, size_t Y, sign sign);
 
 	/*!
-	* @fn allows to change the specific fields of nested board
+	* allows to change the specific fields of nested board
 	* @param X index of the field
 	* @param Y index of the field
-	* @param nested X index of the field
-	* @param nested Y index of the field
+	* @param nested_X index of the field
+	* @param nested_Y index of the field
 	* @param sign that will be emplaced
 	* @return A boolean value that denotes the success of the action
 	*/
-	bool move(size_t, size_t, size_t, size_t, sign);
+	bool move(size_t X, size_t Y, size_t nested_X , size_t nested_Y, sign sign);
 
 
 	/*!
-	* @fn gives acces to board which object holds
+	*  gives acces to board which object holds
 	* @return shraed ptr to the board
 	*/
 	PBoard getBoard();
 
 private:
 
-	/*!
-	* @var shraed ptr to the board
-	*/
+	
 	PBoard board;
 };
 

@@ -27,7 +27,7 @@ using Grid = std::vector<std::vector<Field>>;
 
 
 /*!
- * @class frame to hold TicTacToe boards with the ability to nest them
+ * frame to hold TicTacToe boards with the ability to nest them
  */
 class Board {
 public:
@@ -45,50 +45,47 @@ public:
 
 	/*!
 	* constructor which creates board of TicTacToe of a given size
-	* @param size of the board that will be crated
-	* @param "filling" of the board which can be signs or other boards
+	* @param _size of the board that will be crated
+	* @param field "filling" of the board which can be signs or other boards
 	*/
 	Board(size_t _size, Field field = sign::nothing);
 
 	/*!
 	* constructor which creates board of TicTacToe of a given size based
 	* on two-dimensional dynamic array of Fields which are other boards or signs
-	* @param two-dimensional dynamic array of Fields which are other boards or signs which represents TicTacToe board
-	* @param size
+	* @param spaces two-dimensional dynamic array of Fields which are other boards or signs which represents TicTacToe board
+	* @param size of previous param
 	*/
 	Board(Grid spaces, const int size) : Size(size), Spaces(spaces) {};
 
 
 	/*!
-	 * @fn Returns the size of the Board
+	 *  Returns the size of the Board
 	 * @return size of the Board
 	*/
 	size_t getSize();
 
 	/*!
-	 * @fn Returns two-dimensional dynamic array of Fields which are other boards or signs
+	 *  Returns two-dimensional dynamic array of Fields which are other boards or signs
 	 * @return two-dimensional dynamic array of Fields which are other boards or signs which represents
 	 board
 	*/
 	Grid& getGrid();
 
 	/*!
-	 * @fn prints to console state of the board
+	 *  prints to console state of the board
 	*/
 	void printBoard() const;
 
 	/*!
-	 * @fn creates string representation od the board for eventual comparison of board states
+	 *  creates string representation od the board for eventual comparison of board states
 	 * @return string representation od the board
 	*/
 	std::string getState() const;
 
 private:
 
-	/*!
-	* @var size of the board
-	* @var two-dimensional dynamic array of Fields which are other boards or signs which represents TicTacToe board
-	*/
+	
 	size_t Size;
 	Grid Spaces;
 };
