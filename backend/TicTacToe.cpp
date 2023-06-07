@@ -1,16 +1,15 @@
 #include <iostream>
 #include "Game.h"
 #include <vector>
-#include <thread>
-#include <mutex>
-#include <atomic>
-//*
+#include "AiPlayer.h"
+#include <utility>
+
 void test_controler(size_t size, size_t x, size_t y, size_t low_x, size_t low_y) {
-	PBoard sisiak(new Board(size, Board(size, sign::nic)));
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
 	Controler controler(sisiak);
-	controler.move(x, y, low_x, low_y, sign::igrek);
+	controler.move(x, y, low_x, low_y, sign::circle);
 	try {
-		if (std::get<sign>(controler.GetField(x, y, low_x, low_y)) == sign::igrek)
+		if (std::get<sign>(controler.GetField(x, y, low_x, low_y)) == sign::circle)
 		{
 			std::cout << "move i getField działa" << std::endl;
 		}
@@ -24,11 +23,11 @@ void test_controler(size_t size, size_t x, size_t y, size_t low_x, size_t low_y)
 }
 
 void test_controler_upper(size_t size, size_t x, size_t y) {
-	PBoard sisiak(new Board(size, Board(size, sign::nic)));
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
 	Controler controler(sisiak);
-	controler.move(x, y, sign::igrek);
+	controler.move(x, y, sign::circle);
 	try {
-		if (std::get<sign>(controler.GetField(x, y)) == sign::igrek)
+		if (std::get<sign>(controler.GetField(x, y)) == sign::circle)
 		{
 			std::cout << "move i getField działa na górnej planszy" << std::endl;
 		}
@@ -41,32 +40,37 @@ void test_controler_upper(size_t size, size_t x, size_t y) {
 
 }
 
-
 void test_print(size_t size) {
-	PBoard sisiak(new Board(size, Board(size, sign::nic)));
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
 	Controler controler(sisiak);
 	Game game(sisiak);
-	controler.move(0, 0, 0, 0, sign::igrek);
-	controler.move(0, 0, 1, 1, sign::igrek);
-	controler.move(0, 0, 2, 2, sign::igrek);
+	controler.move(0, 0, 0, 0, sign::circle);
+	controler.move(0, 0, 1, 1, sign::circle);
+	controler.move(0, 0, 2, 2, sign::circle);
+
+	controler.move(0, 2, sign::ex);
 
 
-	controler.board.get()->printBoard();
+	controler.getBoard().get()->printBoard();
 
 }
 
 void test_win(size_t size) {
-	PBoard sisiak(new Board(size, Board(size, sign::nic)));
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
 	Controler controler(sisiak);
 	Game game(sisiak);
-	controler.move(0, 0, 0, 0, sign::igrek);
-	controler.move(0, 0, 1, 1, sign::igrek);
-	controler.move(0, 0, 2, 2, sign::igrek);
+	controler.move(0, 0, 0, 0, sign::circle);
+	controler.move(0, 0, 1, 1, sign::circle);
+	controler.move(0, 0, 2, 2, sign::circle);
+	controler.move(0, 0, 3, 3, sign::circle);
+	controler.move(0, 0, 4, 4, sign::circle);
 
-	controler.move(2, 3, 0, 0, sign::igrek);
-	controler.move(2, 3, 0, 1, sign::igrek);
-	controler.move(2, 3, 0, 2, sign::igrek);
-	controler.move(2, 4, sign::igrek);
+	controler.move(2, 1, 0, 0, sign::circle);
+	controler.move(2, 1, 0, 1, sign::circle);
+	controler.move(2, 1, 0, 2, sign::circle);
+	controler.move(2, 1, 0, 3, sign::circle);
+	controler.move(2, 1, 0, 4, sign::circle);
+	controler.move(2, 2, sign::circle);
 
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
@@ -88,56 +92,16 @@ void test_win(size_t size) {
 
 }
 
-int countMovesToWin(const std::shared_ptr<Board>& board, sign player) {
-	// Check win condition for the current player
-	// ... implementation of win condition check ...
-	Game game(board);
-	if (game.is_won().win && game.is_won().sign_ == player) {
-		return 0;
-	}
-
-	// Check if the board is filled and there is no winner (tie)
-	// ... implementation of tie condition check ...
-
-	// Continue recursive search otherwise
-	int minMoves = std::numeric_limits<int>::max();
-
-	for (size_t i = 0; i < board->getGrid().size(); ++i) {
-		for (size_t j = 0; j < board->getGrid()[i].size(); ++j) {
-			if (std::get<sign>(board->getGrid()[i][j]) == sign::nic) {
-				// Create a copy of the board and make a move
-				std::shared_ptr<Board> newBoard = std::make_shared<Board>(*board);
-				newBoard->getGrid()[i][j] = player;
-
-				// Recursive call to the function for the next player
-				int moves = countMovesToWin(newBoard, player);
-
-				// Update the minimum number of moves
-				if (moves >= 0 && moves < minMoves) {
-					minMoves = moves;
-				}
-			}
-		}
-	}
-
-	// Add the current player's move to the minimum number of moves
-	if (minMoves != std::numeric_limits<int>::max()) {
-		return minMoves + 1;
-	}
-	else {
-		return -1; // No possible moves
-	}
-}
-
 void test_win_upper(size_t size) {
-	PBoard sisiak(new Board(size, Board(size, sign::nic)));
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
 	Controler controler(sisiak);
 	Game game(sisiak);
 
-	controler.move(0, 0, sign::igrek);
-	controler.move(0, 1, sign::igrek);
-	controler.move(0, 2, sign::igrek);
-	controler.move(2, 4, sign::igrek);
+	controler.move(0, 0, sign::circle);
+	controler.move(0, 1, sign::circle);
+	controler.move(0, 2, sign::circle);
+	controler.move(0, 3, sign::circle);
+	controler.move(0, 4, sign::circle);
 
 
 	try {
@@ -155,6 +119,67 @@ void test_win_upper(size_t size) {
 
 }
 
+void test_countMovesToWin() {
+	Board board(3);
+	PBoard pboard(new Board(board));
+	Controler controler(pboard);
+	controler.move(0, 0, sign::ex);
+	controler.move(0, 1, sign::ex);
+	Game game(pboard);
+	std::cout << "ilość ruchów jednego gracza potrzebnych do wygrania planszy: " << game.countMovesToWin(sign::ex) << std::endl;
+
+}
+
+void test_checkWin() {
+	Board board(3);
+	PBoard pboard(new Board(board));
+	Controler controler(pboard);
+	controler.move(0, 0, sign::ex);
+	controler.move(0, 1, sign::ex);
+	Game game(pboard);
+
+	std::cout << "wygrywający ruch: " << game.checkWin(sign::ex).first << "  " << game.checkWin(sign::ex).second << std::endl;
+}
+
+void test_AI()
+{
+	PBoard sisiak(new Board(3, Board(3, sign::nothing)));
+	Controler controler(sisiak);
+	Game game(sisiak);
+	controler.move(0, 0, 0, 0, sign::ex);
+	controler.move(0, 0, 1, 1, sign::ex);
+
+
+	controler.getBoard().get()->printBoard();
+	AiPlayer Ai;
+	std::pair<int, int> move = Ai.AiMove(0, 0, game, sign::ex);
+	std::cout << "Ai robi ruch 0 0 " << move.first << " " << move.second << std::endl;
+
+	move = Ai.AiMove(0, 1, game, sign::circle);
+	std::cout << "Ai robi ruch 0 1 " << move.first << " " << move.second << std::endl;
+
+	std::pair<std::pair<int, int>, std::pair<int, int>> move2 = Ai.AiMove(game, sign::circle);
+	std::cout << "Ai robi ruch " << move2.first.first << " " << move2.first.second << " " << move2.second.first << " " << move2.second.second << std::endl;
+
+
+
+	controler.move(1, 1, sign::circle);
+	controler.move(0, 1, sign::circle);
+	controler.getBoard().get()->printBoard();
+	move2 = Ai.AiMove(game, sign::circle);
+	std::cout << "Ai robi ruch " << move2.first.first << " " << move2.first.second << " " << move2.second.first << " " << move2.second.second << std::endl;
+
+}
+
+void setup(Game& game, int& tryb, size_t size, int zadanyTryb) {
+
+	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
+	game = Game(sisiak);
+
+	tryb = zadanyTryb;
+}
+
+
 int main()
 {
 
@@ -162,17 +187,16 @@ int main()
 	test_controler_upper(5, 1, 4);
 	test_win(5);
 	test_win_upper(5);
-	Board board(3);
-	PBoard pboard(new Board(board));
-	Controler controler(pboard);
-	controler.move(0, 0, sign::iks);
-	controler.move(0, 1, sign::iks);
+	test_countMovesToWin();
+	test_checkWin();
+	test_print(5);
+	test_AI();
 
-	std::cout << "ilość ruchów jednego gracza potrzebnych do wygrania planszy: " << countMovesToWin(pboard, sign::iks) << std::endl;
-	test_print(4);
+	// stopień pokrycia cpp 
 
-
-
+	int tryb;
+	Game game;
+	setup(game, tryb, 4, 1);
 
 	return 0;
 };
