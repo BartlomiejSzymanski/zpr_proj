@@ -1,6 +1,0 @@
-add_subdirectory(AiPlayer)
-add_subdirectory(Board)
-add_subdirectory(Controler)
-add_subdirectory(Game)
-add_subdirectory(HumanPlayer)
-add_subdirectory(Player)

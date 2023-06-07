@@ -13,10 +13,8 @@ void setup(Game& game, int& tryb, size_t size, int zadanyTryb) {
 	tryb = zadanyTryb;
 }
 
-
 int main()
 {
-
 
 	int tryb;
 	Game game;
