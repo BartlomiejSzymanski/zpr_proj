@@ -8,7 +8,7 @@ FetchContent_Declare(
     
 FetchContent_MakeAvailable(Catch2)    
     
-add_executable(GameTest GameTest.cpp)
+add_executable(GameTest src/GameTest.cpp)
 
 target_link_libraries(GameTest PRIVATE Catch2::Catch2WithMain Game)
 

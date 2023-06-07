@@ -1,5 +1,4 @@
-add_library(Game Game.cpp)
+add_library(game Game.cpp)
 
-target_link_libraries(Game PUBLIC Controler)
-
-target_include_directories(Game PUBLIC .)
+target_link_libraries(game PUBLIC controler)
+target_include_directories(game PUBLIC .)
