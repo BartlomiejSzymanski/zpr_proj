@@ -10,6 +10,14 @@ pip install grpcio-tools
 pip install grpcio
 ```
 # To run application use the following commands:
+# To generate gRPC files:
+```
+> cd web_interface/main_menu
+>python3 -m grpc_tools.protoc -I main_menu/proto --python_out=. --grpc_python_out=. main_menu/proto/game.proto
+```
+game_pb2_grpc.py and game_pb2.py should appear in the web_interface/main_menu folder
+
+
 ```
 python manage.py runserver
 ```
