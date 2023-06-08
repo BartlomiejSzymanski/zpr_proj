@@ -17,6 +17,11 @@ class GameService final : public game::Game::Service {
         {
             std::cout << "Server: Create Board of size: \"" << request->boardsize() << "\"." << std::endl;
 
+            PBoard sisiak(new Board(request->boardsize(), Board(request->boardsize(), sign::nothing)));
+	        game = Game(sisiak);
+
+	        mode = request->gamemode();
+
             response->set_gamewon(0);
             response->set_row(0);
             response->set_col(0);
@@ -28,14 +33,46 @@ class GameService final : public game::Game::Service {
         virtual ::grpc::Status MakeMove(::grpc::ServerContext* context, const ::game::Move* request, ::game::EngineResponse* response)
         {
             std::cout << "Server: Player made move : \"" << request->row() << "\n" << request->col() << "\"." << std::endl;
+            game.getControler().move(request->row(), request->col(), request->subrow(), request->subcol(), request->player() == 1 ? sign::ex : sign::circle);
+            bool subwon = false;
+            bool gamewon = false;    
+            if(game.is_won(request->row(), request->col()).win)
+            {   
+                subwon = true;
+                game.getControler().move(request->row(), request->col(), request->player() == 1 ? sign::ex : sign::circle);
+                gamewon = game.is_won().win;
+            }
 
-            response->set_gamewon(0);
-            response->set_row(0);
-            response->set_col(0);
-            response->set_subrow(0);
-            response->set_subcol(0);
+
+            std::pair<std::pair<int, int> ,std::pair<int, int> > aimove = std::make_pair(std::make_pair(-1, -1), std::make_pair(-1, -1));
+            if(mode == 1)
+            {
+                if(std::holds_alternative<Board>(game.getGrid()[request->row()][request->col()]))
+                {   
+                    std::pair<int, int> aimovetemp = Ai.AiMove(request->row(), request->col(), game, request->player() == 0 ? sign::ex : sign::circle);
+                    aimove = std::make_pair(std::make_pair(request->row(), request->col()), aimovetemp);
+                }
+                else
+                {
+                aimove = Ai.AiMove(game, request->player() == 0 ? sign::ex : sign::circle);
+                }
+            }
+            
+
+            response->set_gamewon(gamewon);
+            response->set_subcellwon(subwon);
+            response->set_row(aimove.first.first);
+            response->set_col(aimove.first.second);
+            response->set_subrow(aimove.second.first);
+            response->set_subcol(aimove.second.second);
             return grpc::Status::OK;
-        }        
+        }   
+
+    private:
+    AiPlayer Ai;
+    Game game;
+    int mode;
+
 };
 
 int main(int argc, char* argv[])
@@ -55,20 +92,9 @@ int main(int argc, char* argv[])
 
 void setup(Game& game, int& tryb, size_t size, int zadanyTryb) {
 
-	PBoard sisiak(new Board(size, Board(size, sign::nothing)));
-	game = Game(sisiak);
-
-	tryb = zadanyTryb;
+	
 }
 
-// int main()
-// {
 
-// 	int tryb;
-// 	Game game;
-// 	setup(game, tryb, 4, 1);
-
-// 	return 0;
-// };
 
 
