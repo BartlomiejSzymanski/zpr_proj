@@ -286,6 +286,10 @@ function passMoveToEngine(moveData){
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       const response = JSON.parse(xhr.responseText)
       console.log(response)
+      if( response["errCode"]){
+        throw new Error("Error occured in GameEngine while processing your move. Check Game Engine")
+      }
+
       if (response["gameWon"]) {GameIsWon(move["currentPlayer"]);}
       
       if (response["subCellWon"]) {
@@ -296,7 +300,7 @@ function passMoveToEngine(moveData){
       else if(gameMode === "1") {
         const targetCell = getCell(response["row"], response["col"]);
         makeMove(targetCell,response["subRow"], response["subCol"],2)}
-    
+      
     }
   };
 
