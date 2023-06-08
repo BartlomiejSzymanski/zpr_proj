@@ -28,5 +28,5 @@ message EngineResponse{
     int32 col = 4;
     int32 subRow = 5;
     int32 subCol = 6;
-    
+    int32 errCode = 7;
 }
