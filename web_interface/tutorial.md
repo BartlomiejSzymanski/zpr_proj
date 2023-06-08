@@ -24,7 +24,7 @@ python manage.py runserver
 
 # To generate gRPC files:
 ```
-> cd web_interface/main_menu
+> cd web_interface
 >python3 -m grpc_tools.protoc -I proto --python_out=. --grpc_python_out=. proto/game.proto
 ```
 game_pb2_grpc.py and game_pb2.py should appear in the web_interface/main_menu folder
