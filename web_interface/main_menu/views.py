@@ -21,10 +21,7 @@ def game(request):
     if request.method == 'POST':
         game_mode = request.POST['game_mode']
         board_size = request.POST['board_size']
-        
-        if not setup_game(int(board_size), int(game_mode)):
-            raise Exception("Error occured while setting up the game in Game Engine\n")
-                
+        setup_game(int(board_size), int(game_mode))
         return render(request, 'board.html', {'board_size': board_size, 'game_mode': game_mode})
     elif request.method == 'GET':
         return render(request, 'game_options.html')
@@ -77,6 +74,4 @@ def setup_game(board_size, game_mode):
         stub = game_pb2_grpc.GameStub(channel)
         setup = game_pb2.Setup(boardSize=board_size, gameMode=game_mode)
         engine_reply = stub.GameSetup(setup)
-        if engine_reply.errCode == 0:
-            return True
-        return False
+        

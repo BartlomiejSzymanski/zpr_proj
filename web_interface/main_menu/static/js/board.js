@@ -286,9 +286,6 @@ function passMoveToEngine(moveData){
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
       const response = JSON.parse(xhr.responseText)
       console.log(response)
-      if( response["errCode"]){
-        throw new Error("Error occured in GameEngine while processing your move. Check Game Engine")
-      }
 
       if (response["gameWon"]) {GameIsWon(move["currentPlayer"]);}
       
