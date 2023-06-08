@@ -4,8 +4,8 @@
 
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
-import main_menu.game_pb2 as game_pb2
-import main_menu.game_pb2_grpc as game_pb2_grpc
+import game_pb2 as game_pb2
+import game_pb2_grpc as game_pb2_grpc
 import grpc
 import json
 
